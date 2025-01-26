@@ -11,7 +11,6 @@ Norm5 = -10.
 Norm6 = -10.
 Norm7 = -10.
 
-
 for line in InputFile1:
     if line.startswith("total_hits:"):
         if max < int(line.split()[1:][0]):
@@ -29,8 +28,7 @@ for line in InputFile1:
         if Norm6 < line[5]: Norm6 = line[5]
         if Norm7 < line[6]: Norm7 = line[6]
         hiits.append(line)
-
-
+        
 for i in hiits:
     if i[0] != "t":
         i[0]=i[0]/Norm1
@@ -40,8 +38,7 @@ for i in hiits:
         i[4]=i[4]/Norm5
         i[5]=i[5]/Norm6
         i[6]=i[6]/Norm7
-
-
+        
 # Part 2:
 
 Matrix = []
@@ -69,8 +66,6 @@ FinalMatrix1 = []
 for i in NewVectorMatrix:
     newmatrix = resize_matrix(i, max, max)
     FinalMatrix1.append(newmatrix)
-    
-    
     
 def resize_matrix(matrix, max_rows, max_cols):
     new_matrix1 = np.zeros((max_rows, max_cols))
@@ -137,23 +132,16 @@ def returnImages(InputFile):
     for i in NewVectorMatrix:
         newmatrix = resize_matrix(i, max, max)
         FinalMatrix1.append(newmatrix) 
-        
-        
-        
  
 import matplotlib.pyplot as plt
 
-# Define custom colormap
 cmap = plt.get_cmap('YlOrRd') # Choose a colormap
 
-# Loop through first 100 matrices and save each one as a PNG file
 for i in range(10):
-    # Get the i-th matrix (assuming the matrices are stored in a list called matrices)
     matrix = FinalMatrix1[i]
     
-    # Plot matrix with custom colormap
     plt.figure(figsize=(8, 6), dpi=28)
     plt.imshow(matrix, cmap=cmap, interpolation='nearest')
     plt.colorbar()
-    plt.savefig(f'/home/meskar/Desktop/Files_Antares/anue-cc/data_{i}') # Save the plot as a PNG file with a unique name
+    plt.savefig(f'/home/meskar/Desktop/Files_Antares/anue-cc/data_{i}') 
     plt.close() 
