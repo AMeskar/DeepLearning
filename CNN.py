@@ -1,174 +1,189 @@
-import timeit
-import zipfile
-import numpy as np
+#################################################################################
+################# LIBRARIES #####################################################
+#################################################################################
+
 import os
-import tensorflow as tf
-from tensorflow import keras
-from tensorflow.keras import models
-from tensorflow.keras import layers
+import numpy as np
 import matplotlib.pyplot as plt
-from tensorflow.keras.regularizers import l2
-from tensorflow.keras.optimizers import Adam
-from sklearn.metrics import f1_score
-from tensorflow.keras.layers import BatchNormalization, Conv2DTranspose, Conv2D, MaxPooling2D, Flatten, Dense, Dropout
-from tensorflow.keras.preprocessing.image import load_img, img_to_array
+import tensorflow as tf
+
+from PIL import Image
 from sklearn.model_selection import train_test_split
 from tensorflow.keras.utils import to_categorical
 from tensorflow.keras.models import Sequential
-from tensorflow.keras.preprocessing.image import ImageDataGenerator
-from tensorflow.keras import regularizers
-from sklearn.preprocessing import normalize
-import numpy as np
-import os
-from PIL import Image
+from tensorflow.keras.layers import (
+    Conv2D, MaxPooling2D, Dropout, Flatten, Dense
+)
+from tensorflow.keras.optimizers import Adam
+from tensorflow.keras.callbacks import EarlyStopping, ModelCheckpoint, ReduceLROnPlateau
 
 
-def load_npz(dir_path):
-    c = 0
+def load_npz(dir_path, max_images=100000, max_rows=10000):
+
     images = []
+    count_loaded = 0
 
-    list_of_files = os.listdir(dir_path)
-    for filename in list_of_files:
-        if c <= 100000:
-            file_path = os.path.join(dir_path, filename)
-            data = np.load(file_path)
-            matrix_keys = list(data.files)
+    for filename in sorted(os.listdir(dir_path)):
+        if count_loaded >= max_images:
+            break
 
-            for key in matrix_keys:
+        file_path = os.path.join(dir_path, filename)
+        with np.load(file_path) as data:
+            for key in data.files:
+                if count_loaded >= max_images:
+                    break
+
                 matrix = data[key]
-                num_rows = matrix.shape[0]
-                max_vals = np.max(matrix, axis=0)
+                num_rows, num_cols = matrix.shape
 
-                if np.any(max_vals == 0):
-                    normalized_matrix = np.where(max_vals == 0, matrix, matrix / max_vals)
-                else:
-                    normalized_matrix = matrix / max_vals
+                if 1 <= num_rows <= max_rows:
 
-                if 1 <= num_rows <= 10000:
-                    pad_width = ((0, 10000 - num_rows), (0, 0))
+                    max_vals = np.max(matrix, axis=0)
+                    normalized_matrix = np.divide(
+                        matrix,
+                        max_vals,
+                        out=np.zeros_like(matrix),  # Where max_vals == 0
+                        where=max_vals != 0
+                    )
+
+                    pad_width = ((0, max_rows - num_rows), (0, 0))
                     padded_matrix = np.pad(normalized_matrix, pad_width, mode='constant')
 
-                    # Creating image from the normalized matrix
-                    image = Image.fromarray((padded_matrix * 255).astype(np.uint8))
-                    images.append(image)
-                    c += 1
+                    image_array = (padded_matrix * 255).astype(np.uint8)
+                    images.append(image_array)
 
-            data.close()
+                    count_loaded += 1
 
     if len(images) == 0:
-        raise ValueError("No matrices with 50 to 100 rows found.")
+        raise ValueError(f"No valid matrices found in {dir_path}.")
 
-    # Reshape the images and add the channel dimension
-    reshaped_images = np.array([np.array(image) for image in images])
-    reshaped_images = np.expand_dims(reshaped_images, axis=-1)
+    images = np.array(images)
 
-    return reshaped_images
-
-
-dir1 = '/sps/atlas/h/hatmani/ANTARES/Inputs/Matrix/anue_b_CC'
-dir2 = '/sps/atlas/h/hatmani/ANTARES/Inputs/Matrix/anue_b_NC'
-dir3 = '/sps/atlas/h/hatmani/ANTARES/Inputs/Matrix/anumu_b_CC'
-dir4 = '/sps/atlas/h/hatmani/ANTARES/Inputs/Matrix/anumu_b_NC'
-dir5 = '/sps/atlas/h/hatmani/ANTARES/Inputs/Matrix/nue_b_CC'
-dir6 = '/sps/atlas/h/hatmani/ANTARES/Inputs/Matrix/nue_b_NC'
-dir7 = '/sps/atlas/h/hatmani/ANTARES/Inputs/Matrix/numu_b_CC'
-dir8 = '/sps/atlas/h/hatmani/ANTARES/Inputs/Matrix/numu_b_NC'
+    images = np.expand_dims(images, axis=-1)
+    return images
 
 
+#################################################################################
+################# DIRECTORIES ###################################################
+#################################################################################
 
-images1 = load_npz(dir1)
-images2 = load_npz(dir2)
-images3 = load_npz(dir3)
-images4 = load_npz(dir4)
-images5 = load_npz(dir5)
-images6 = load_npz(dir6)
-images7 = load_npz(dir7)
-images8 = load_npz(dir8)
+dir_paths = [
+    '/sps/atlas/h/hatmani/ANTARES/Inputs/Matrix/anue_b_CC',
+    '/sps/atlas/h/hatmani/ANTARES/Inputs/Matrix/anue_b_NC',
+    '/sps/atlas/h/hatmani/ANTARES/Inputs/Matrix/anumu_b_CC',
+    '/sps/atlas/h/hatmani/ANTARES/Inputs/Matrix/anumu_b_NC',
+    '/sps/atlas/h/hatmani/ANTARES/Inputs/Matrix/nue_b_CC',
+    '/sps/atlas/h/hatmani/ANTARES/Inputs/Matrix/nue_b_NC',
+    '/sps/atlas/h/hatmani/ANTARES/Inputs/Matrix/numu_b_CC',
+    '/sps/atlas/h/hatmani/ANTARES/Inputs/Matrix/numu_b_NC'
+]
 
-# Display the shape of the loaded images
-print("Images 1 shape:", images1.shape)
-print("Images 2 shape:", images2.shape)
-print("Images 3 shape:", images3.shape)
-print("Images 4 shape:", images4.shape)
-print("Images 5 shape:", images5.shape)
-print("Images 6 shape:", images6.shape)
-print("Images 7 shape:", images7.shape)
-print("Images 8 shape:", images8.shape)
+#################################################################################
+################# LOAD IMAGES ###################################################
+#################################################################################
 
-npy_array = np.concatenate((images1, images2, images3, images4,
-                           images5, images6, images7, images8), axis=0)
+image_sets = [load_npz(d) for d in dir_paths]
+for i, imgs in enumerate(image_sets):
+    print(f"Images {i+1} shape: {imgs.shape}")
 
-print(np.shape(npy_array))
+all_images = np.concatenate(image_sets, axis=0)
 
-label1 = np.zeros(len(images1))
-label2 = np.ones(len(images2))
-label3 = np.full(len(images3), 2)
-label4 = np.full(len(images4), 3)
-label5 = np.full(len(images5), 4)
-label6 = np.full(len(images6), 5)
-label7 = np.full(len(images7), 6)
-label8 = np.full(len(images8), 7)
+all_labels = []
+for class_index, imgs in enumerate(image_sets):
+    labels_for_this_class = np.full(len(imgs), class_index)
+    all_labels.append(labels_for_this_class)
+all_labels = np.concatenate(all_labels)
 
-labels = np.concatenate([label1, label2, label3, label4, label5, label6, label7, label8], axis=0)
+num_classes = len(dir_paths)
+all_labels = to_categorical(all_labels, num_classes=num_classes)
 
-# Convert labels to one-hot encoding
-labels = to_categorical(labels, num_classes=8)
-print(np.shape(labels))
+print("All images shape:", all_images.shape)
+print("All labels shape:", all_labels.shape)
 
-
+#################################################################################
+################# TRAIN/TEST SPLIT ##############################################
+#################################################################################
 
 X_train, X_test, y_train, y_test = train_test_split(
-    npy_array, labels, test_size=0.3, random_state=42)
+    all_images, all_labels, test_size=0.3, random_state=42
+)
 
-#X_train = X_train.reshape(X_train.shape[0], -1)
-#X_test = X_test.reshape(X_test.shape[0], -1)
+print("X_train shape:", X_train.shape)
+print("X_test shape:", X_test.shape)
+print("y_train shape:", y_train.shape)
+print("y_test shape:", y_test.shape)
 
-print(np.shape(X_train))
-print(np.shape(X_test))
-print(np.shape(y_test))
-print(np.shape(y_train))
-model = models.Sequential()
-model.add(layers.Conv2D(128, (3, 3), activation='relu', input_shape=(100, 7, 1), padding='same'))
-model.add(layers.BatchNormalization())
-model.add(layers.Dropout(0.2))  # Add a dropout layer with a dropout rate of 0.2
-model.add(layers.MaxPooling2D((2, 2)))
-model.add(layers.Conv2D(256, (3, 3), activation='relu', padding='same'))
-model.add(layers.BatchNormalization())
-model.add(layers.Dropout(0.2))
-model.add(layers.MaxPooling2D((2, 2)))
-model.add(layers.Conv2D(256, (3, 3), activation='relu', padding='same'))
-model.add(layers.BatchNormalization())
-model.add(layers.Dropout(0.2))
+#################################################################################
+################# MODEL #########################################################
+#################################################################################
 
-model.add(layers.Flatten())
-model.add(layers.Dropout(0.5))
-model.add(layers.Dense(8, activation='softmax'))
+model = Sequential([
+    Conv2D(64, (3, 3), activation='relu', padding='same', input_shape=(100, 7, 1)),
+    MaxPooling2D((2, 2)),
+    Dropout(0.2),
 
-model.compile(optimizer = tf.keras.optimizers.Adam(learning_rate=0.00001),
-              loss = "categorical_crossentropy",
-              metrics=['accuracy'])
+    Conv2D(128, (3, 3), activation='relu', padding='same'),
+    MaxPooling2D((2, 2)),
+    Dropout(0.2),
 
-history = model.fit(X_train, y_train,
-                    batch_size=5, epochs=10,
-                    validation_data=(X_test, y_test))
+    Flatten(),
+    Dropout(0.5),
+    Dense(num_classes, activation='softmax')
+])
 
-loss, accuracy = model.evaluate(X_test, y_test)
-print('Training loss:', loss)
-print('Training accuracy:', accuracy)
+model.compile(
+    optimizer=Adam(learning_rate=1e-5),
+    loss='categorical_crossentropy',
+    metrics=['accuracy']
+)
 
-plt.plot(history.history['accuracy'])
-plt.plot(history.history['val_accuracy'])
+#################################################################################
+################# TRAINING ######################################################
+#################################################################################
+
+callbacks = [
+    EarlyStopping(monitor='val_loss', patience=10, restore_best_weights=True),
+    ModelCheckpoint('best_model.h5', monitor='val_loss', save_best_only=True),
+    ReduceLROnPlateau(monitor='val_loss', factor=0.2, patience=5, min_lr=1e-7)
+]
+history = model.fit(
+    X_train, y_train,
+    batch_size=32,
+    epochs=100,
+    validation_data=(X_test, y_test),
+    callbacks=callbacks
+)
+
+#################################################################################
+################# EVALUATION ####################################################
+#################################################################################
+
+loss, accuracy = model.evaluate(X_test, y_test, verbose=0)
+print('Test loss:', loss)
+print('Test accuracy:', accuracy)
+
+#################################################################################
+############# PLOTTING ##########################################################
+#################################################################################
+
+plt.figure(figsize=(12, 5))
+
+plt.subplot(1, 2, 1)
+plt.plot(history.history['accuracy'], label='Train Acc')
+plt.plot(history.history['val_accuracy'], label='Val Acc')
 plt.title('Model Accuracy')
 plt.xlabel('Epoch')
 plt.ylabel('Accuracy')
-plt.legend(['Train', 'Validation'], loc='upper left')
-plt.savefig('annaccuracy.png')
+plt.legend()
 
-# Plot loss
-plt.plot(history.history['loss'])
-plt.plot(history.history['val_loss'])
+plt.subplot(1, 2, 2)
+plt.plot(history.history['loss'], label='Train Loss')
+plt.plot(history.history['val_loss'], label='Val Loss')
 plt.title('Model Loss')
 plt.xlabel('Epoch')
 plt.ylabel('Loss')
-plt.legend(['Train', 'Validation'], loc='upper right')
-plt.savefig('annloss.png')
+plt.legend()
+
+plt.tight_layout()
+plt.savefig('training_curves.png', dpi=300)
+plt.show()
