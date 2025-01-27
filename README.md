@@ -16,7 +16,7 @@ The scripts provided achieve the following:
 ## Table of Contents
 
 1. [Features](https://github.com/AMeskar/DeepLearning?tab=readme-ov-file#features)
-2. [Project Workflow]()
+2. [Project Workflow](https://github.com/AMeskar/DeepLearning?tab=readme-ov-file#Project-Workflow)
 3. [Code Breakdown]()
 4. [Setup Instructions]()
 5. [Future Improvements]()
