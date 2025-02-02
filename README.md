@@ -110,14 +110,12 @@ Examples:
 ### 🔹 Backpropagation & Gradient Descent
 To optimize the network, **gradient descent** is used to update weights.
 
-**Gradient Descent Update Rule**$$w_i (t+1) = w_i (t) - \eta 
-abla E(w_i (t))$$
+**Gradient Descent Update Rule** $$w_i (t+1) = w_i (t) - \eta \nabla E(w_i (t))$$
 
 where:
-- \( \eta \) is the learning rate.
-- \( E \) is the loss function.
-- \( 
-abla E \) is the gradient.
+- $$\( \eta \)$$ is the learning rate.
+- $$\( E \)$$ is the loss function.
+- $$\( \nabla E \)$$ is the gradient.
 
 ---
 
