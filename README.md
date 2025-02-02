@@ -104,13 +104,13 @@ Activation functions introduce non-linearity. Common ones include:
 A **loss function** measures the difference between the predicted output and the actual target.
 
 Examples:
-- **Mean Squared Error (MSE)**: $$MSE = rac{1}{N} \sum_{i=1}^{N} (y_i - t_i)^2$$
+- **Mean Squared Error (MSE)**:  $$MSE = rac{1}{N} \sum_{i=1}^{N} (y_i - t_i)^2$$
 - **Cross-Entropy Loss**:   $$CE = -rac{1}{N} \sum_{i=1}^{N} y_i \log(t_i)$$
 
 ### 🔹 Backpropagation & Gradient Descent
 To optimize the network, **gradient descent** is used to update weights.
 
-**Gradient Descent Update Rule** $$w_i (t+1) = w_i (t) - \eta \nabla E(w_i (t))$$
+**Gradient Descent Update Rule**  $$w_i (t+1) = w_i (t) - \eta \nabla E(w_i (t))$$
 
 where:
 - $$\( \eta \)$$ is the learning rate.
@@ -124,14 +124,14 @@ where:
 ### 🔹 Convolution Operation
 Each convolutional layer applies a **filter (kernel)** of size $$\( h \times w \)$$ to an input tensor.
 
-**Convolutional Layer Output**$$y_{ij} = \sum_{m=1}^{h} \sum_{n=1}^{w} K_{mn} X_{(i+m)(j+n)}$$
+**Convolutional Layer Output**  $$y_{ij} = \sum_{m=1}^{h} \sum_{n=1}^{w} K_{mn} X_{(i+m)(j+n)}$$
 
 where:
 - $$\( X \)$$ is the input matrix.
 - $$\( K \)$$ is the kernel (filter).
 - $$\( y_{ij} \)$$ is the output feature map.
 
-**Output Size Formula** $$H_{out} = \frac{H_{in} - h_{kernel} + 2 \times padding}{stride} + 1$$
+**Output Size Formula**  $$H_{out} = \frac{H_{in} - h_{kernel} + 2 \times padding}{stride} + 1$$
 
 $$W_{out} = \frac{W_{in} - w_{kernel} + 2 \times padding}{stride} + 1$$
 
@@ -144,14 +144,14 @@ where:
 ### 🔹 Pooling Layer
 Pooling reduces dimensionality by selecting important features.
 
-**Pooling Output Size**$$H_{out} = rac{H_{in} - h_{kernel}}{stride} + 1$$
+**Pooling Output Size**  $$H_{out} = rac{H_{in} - h_{kernel}}{stride} + 1$$
 
 $$W_{out} = rac{W_{in} - w_{kernel}}{stride} + 1$$
 
 ### 🔹 Fully Connected Layer
 Once convolutional layers extract features, fully connected layers process them for classification.
 
-**Fully Connected Neuron Output**$$y_j = h \left( \sum_{i=1}^{n} w_{ji} x_i + b_j \right)$$
+**Fully Connected Neuron Output**  $$y_j = h \left( \sum_{i=1}^{n} w_{ji} x_i + b_j \right)$$
 
 where:
 - $$\( x_i \)$$ are the inputs from the previous layer.
@@ -171,7 +171,7 @@ where:
 ### 🔹 Optimization: Backpropagation in CNNs
 CNNs use **gradient descent** to update weights based on **backpropagation**, just like ANNs.
 
-**Gradient Update Rule**$$w_i (t+1) = w_i (t) - \eta \nabla E(w_i (t))$$
+**Gradient Update Rule**  $$w_i (t+1) = w_i (t) - \eta \nabla E(w_i (t))$$
 
 where:
 - $$\( \eta \)$$ is the learning rate.
