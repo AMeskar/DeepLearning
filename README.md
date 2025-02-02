@@ -7,8 +7,8 @@ This project processes simulated ANTARES data, prepares it for machine learning,
 1. [Features](#features)
 2. [Project Workflow](#project-workflow)
 3. [Code Breakdown](#code-breakdown)
-4. [Basic Math Explanation](#Basic-Math-Explanation)
-5. [Setup Instructions](#setup-instructions)
+4. [Setup Instructions](#setup-instructions)
+5. [Basic Math Explanation](#Basic-Math-Explanation)
 6. [Future Improvements](#future-improvements)
 7. [Contact Information](#contact-information)
 
