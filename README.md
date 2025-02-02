@@ -4,13 +4,13 @@ This project processes simulated ANTARES data, prepares it for machine learning,
 
 ## Table of Contents
 
-1. [Features](#features)
-2. [Project Workflow](#project-workflow)
-3. [Code Breakdown](#code-breakdown)
-4. [Setup Instructions](#setup-instructions)
-5. [Basic Math Explanation](#Basic-Math-Explanation)
-6. [Future Improvements](#future-improvements)
-7. [Contact Information](#contact-information)
+1. [Features](#features){}
+2. [Project Workflow](#project-workflow){}
+3. [Code Breakdown](#code-breakdown){}
+4. [Setup Instructions](#setup-instructions){}
+5. [Future Improvements](#future-improvements){}
+6. [Basic Math Explanation](#Basic-Math-Explanation){}
+7. [Contact Information](#contact-information){}
 
 
 ## Features
@@ -176,7 +176,7 @@ CNNs use **gradient descent** to update weights based on **backpropagation**, ju
 where:
 - $$\( \eta \)$$ is the learning rate.
 - $$\( E \)$$ is the loss function.
-- $$\( \nabla E \)$$ is the gradient of the loss with respect to the weights.
+- $$\( \nabla E \)$$ is the gradient of the loss to the weights.
 
 ---
 
@@ -199,6 +199,6 @@ where:
 
 ---
 
-### 📌 License
+### 📌 Contact Information
 This document is for educational purposes.
 
