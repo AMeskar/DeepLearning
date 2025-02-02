@@ -58,7 +58,8 @@ This script loads structured matrices and formats them as image-like data for CN
 **Auto_Read_text.sh** installs dependencies and processes individual **.evt** files. **Auto_Run_All.sh** automates the parallel processing of multiple files in a given directory, ensuring seamless data extraction and preparation.
   
 ## Basic Math Explanation
-# Mathematical Explanation of ANN and CNN
+
+### Mathematical Explanation of ANN and CNN
 
 This document provides a mathematical explanation of **Artificial Neural Networks (ANNs)** and **Convolutional Neural Networks (CNNs)**. It focuses purely on the theoretical mathematical foundations of these networks without details on implementation.
 
