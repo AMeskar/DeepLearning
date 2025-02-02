@@ -203,5 +203,5 @@ Enhancements could include hyperparameter tuning for model optimization, augment
 ### 📌 Contact Information
 
 - Email: Meskaramine2@gmail.com
-- LinkedIn: linkedin.com/in/amine-meskar
+- LinkedIn: [LinkdIn](linkedin.com/in/amine-meskar)
 
