@@ -59,11 +59,6 @@ This script loads structured matrices and formats them as image-like data for CN
 
 ## Setup Instructions
 
-To set up the project, ensure **Python 3.x**, TensorFlow, and ROOT are installed. Clone the repository and run the scripts in the specified order to process data and train models.
-
-## Future Improvements
-
-Enhancements could include hyperparameter tuning for model optimization, augmentation techniques to increase dataset robustness, and additional deep learning architectures for improved classification accuracy.
 
   
 ## Basic Math Explanation
@@ -199,6 +194,14 @@ where:
 
 ---
 
+## Future Improvements
+
+Enhancements could include hyperparameter tuning for model optimization, augmentation techniques to increase dataset robustness, and additional deep learning architectures for improved classification accuracy.
+
+---
+
 ### 📌 Contact Information
-This document is for educational purposes.
+
+- Email: Meskaramine2@gmail.com
+- LinkedIn: linkedin.com/in/amine-meskar
 
