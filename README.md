@@ -84,7 +84,7 @@ An **Artificial Neural Network (ANN)** consists of multiple layers:
 ### 🔹 Forward Propagation
 Each neuron in layer \( l \) receives inputs from layer \( l-1 \), applies a weighted sum, adds a bias, and passes it through an activation function.
 
-**Neuron Output Equation** $$y_j^{(l)} = h \left( \sum_{i=1}^{n} w_{ji}^{(l)} x_i^{(l-1)} + b_j^{(l)} \right)$$
+**Neuron Output Equation** $$y_j^{(l)} = h \left(  \sum_{i=1}^{n}  w_{ji}^{(l)}  x_i^{(l-1)}  + b_j^{(l)} \right)$$
 
 where:
 - $$\( x_i^{(l-1)} \)$$ are the inputs from the previous layer.
@@ -104,8 +104,8 @@ Activation functions introduce non-linearity. Common ones include:
 A **loss function** measures the difference between the predicted output and the actual target.
 
 Examples:
-- **Mean Squared Error (MSE)**  $$MSE = rac{1}{N} \sum_{i=1}^{N} (y_i - t_i)^2$$
-- **Cross-Entropy Loss**  $$CE = -rac{1}{N} \sum_{i=1}^{N} y_i \log(t_i)$$
+- **Mean Squared Error (MSE)**: $$MSE = rac{1}{N} \sum_{i=1}^{N} (y_i - t_i)^2$$
+- **Cross-Entropy Loss**:   $$CE = -rac{1}{N} \sum_{i=1}^{N} y_i \log(t_i)$$
 
 ### 🔹 Backpropagation & Gradient Descent
 To optimize the network, **gradient descent** is used to update weights.
