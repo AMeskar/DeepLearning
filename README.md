@@ -1,119 +1,70 @@
-
 # ANTARES Data Processing and Neural Network Training
 
-This project processes simulated ANTARES data, prepares it for machine learning, and implements various neural network models for classification tasks. It demonstrates proficiency in Python, shell scripting, machine learning, and data preprocessing, showcasing an end-to-end pipeline.
-
-The scripts provided achieve the following:
-
-- Extract and normalize data from files.
-
-- Transform data into usable matrices for machine learning.
-
-- Implement Artificial Neural Networks (ANN) and Convolutional Neural Networks (CNN).
-
-- Automate data preparation using shell scripts.
+This project processes simulated ANTARES data, prepares it for machine learning, and implements various neural network models for classification tasks. It demonstrates expertise in Python, shell scripting, machine learning, and data preprocessing and provides a complete pipeline from raw data to trained models.
 
 ## Table of Contents
 
-1. [Features](https://github.com/AMeskar/DeepLearning?tab=readme-ov-file#features)
-2. [Project Workflow](https://github.com/AMeskar/DeepLearning?tab=readme-ov-file#Project-Workflow)
-3. [Code Breakdown](https://github.com/AMeskar/DeepLearning?tab=readme-ov-file#code-breakdown)
-4. [Setup Instructions]()
-5. [Future Improvements]()
-6. [Contact Information]()
+1. [Features](#features)
+2. [Project Workflow](#project-workflow)
+3. [Code Breakdown](#code-breakdown)
+4. [Basic Math Explanation](#Basic-Math-Explanation)
+5. [Setup Instructions](#setup-instructions)
+6. [Future Improvements](#future-improvements)
+7. [Contact Information](#contact-information)
+
+
 ## Features
 
-- Data Processing:
+The project processes **.evt** simulation files, extracts and normalizes event hit data, and converts it into structured matrices. For data transformation, it employs Python scripts such as **Matrix.py** and **Prepare_Matrix.py** and efficiently stores matrices using formats like **.npz** or **ROOT**.
 
-  - Parsing **.evt** files to extract event hits.
+Neural network models are implemented using **TensorFlow/Keras**. For classification tasks, both Artificial Neural Networks (ANNs) and Convolutional Neural Networks (CNNs) are available. The ANN uses fully connected layers, while the CNN leverages **Conv2D layers** for spatial feature extraction, making it ideal for image-like data representations.
 
-  - Normalizing and reshaping data into matrices.
+To streamline data handling, automation is achieved through **Bash scripts**, including **Auto_Read_text.sh** and **Auto_Run_All.sh**, which facilitate batch processing and matrix preparation. Additionally, visualization tools generate performance plots, track accuracy, and save intermediate matrices for analysis.
 
-- Model Development:
-
-  - Training an ANN and CNN for classification tasks.
-
-  - Leveraging TensorFlow/Keras for deep learning.
-
-- Automation:
-
-  - Bash scripts to streamline file preparation and processing.
-
-- Visualization:
-
-  - Generating performance plots and saving intermediate matrices.
 ## Project Workflow
 
-1. Data Preparation
- 
-- Input files: **.evt** simulation files containing event data.
+### Data Preparation
 
-- Conversion to matrices using Python (**Matrix.py**, **Prepare_Matrix.py**).
+The project starts with raw **.evt** simulation files containing event data. These files are parsed and converted into structured matrices using Python scripts. The processed data can be stored as **.npz** or **ROOT** files to optimize storage and retrieval.
 
-- Optional storage as .npz or ROOT files for efficient handling.
+### Automation
 
-2. Automation
-\
-Shell scripts (**Auto_Read_text.sh**, **Auto_Run_All.sh**) to handle batch processing of multiple **.evt** files, automating data extraction, and preparing input matrices.
+Shell scripts automate the extraction and transformation of data, handling batch processing efficiently. **Auto_Read_text.sh** ensures dependencies are installed and processes individual files, while **Auto_Run_All.sh** executes batch processing across multiple files.
 
-3. Model Training
-\
-ANN (Artificial Neural Network):
+### Model Training
 
-- Multi-layer dense model for classification.
+The ANN model consists of multiple dense layers, with dropout layers to prevent overfitting. It is trained using labeled matrices, tracking accuracy and loss over iterations. The CNN model, designed for spatial data, incorporates **Conv2D layers** and pooling mechanisms to extract hierarchical features. Early stopping and model checkpoints are employed to ensure optimal performance.
 
-- Training and validation with accuracy and loss tracking.
-
-CNN (Convolutional Neural Network):
-
-- Conv2D layers for spatial feature extraction.
-
-- Used for image-like matrix data.
 ## Code Breakdown
 
-1. Matrix.py:
+### Matrix.py
 
-- Reads .evt files and extracts hit data.
+This script reads **.evt** files, extracts hit data, normalizes values, and structures them into uniform matrices. The output is stored in a suitable format for machine learning.
 
-- Normalizes and resizes matrices for uniform dimensions.
+### Prepare_Matrix.py
 
-- Generates and saves final matrices.
+This script processes **.evt** files, converts them into **.npz** or **ROOT** formats, and highlights the use of ROOT for efficient scientific data handling.
 
-2. Prepare_Matrix.py:
+### Artificial_Neural_Network.py
 
-- Parses .evt files and generates .npz or .root files.
+The ANN model is implemented in this script. It loads matrices from directories, splits data into train/test sets, defines a multi-layer dense network with dropout regularization, and plots training performance metrics.
 
-- Highlights use of ROOT framework for scientific data handling.
+### Convolutional_Neural_Network.py
 
-3. Artificial_Neural_Network.py:
+This script loads structured matrices and formats them as image-like data for CNN training. It defines a convolutional architecture using **Conv2D** and pooling layers, applies **early stopping**, and saves the best-performing model while generating accuracy and loss plots.
 
-- Loads matrices from directories.
+### Shell Scripts
 
-- Splits data into train/test sets.
+**Auto_Read_text.sh** installs dependencies and processes individual **.evt** files. **Auto_Run_All.sh** automates the parallel processing of multiple files in a given directory, ensuring seamless data extraction and preparation.
 
-- Implements a dense ANN model with dropout layers.
+## Setup Instructions
 
-- Plots training curves and saves model performance metrics.
+To set up the project, ensure **Python 3.x**, TensorFlow, and ROOT are installed. Clone the repository and run the scripts in the specified order to process data and train models.
 
-4. Convolutional_Neural_Network.py:
+## Future Improvements
 
-- Loads normalized matrices as image-like data.
+Enhancements could include hyperparameter tuning for model optimization, augmentation techniques to increase dataset robustness, and additional deep learning architectures for improved classification accuracy.
 
-- Implements a CNN with Conv2D and pooling layers.
-
-- Monitors model performance using callbacks like early stopping.
-
-- Saves the best model and generates training plots.
-
-5. Shell Scripts:
-\
-Auto_Read_text.sh:
-
-- Installs dependencies and processes .evt files.
-
-Auto_Run_All.sh:
-
-- Automates parallel processing of files in a directory.
   
 ## Basic Math Explanation
 # Mathematical Explanation of ANN and CNN
