@@ -114,10 +114,11 @@ Auto_Read_text.sh:
 Auto_Run_All.sh:
 
 - Automates parallel processing of files in a directory.
+  
 ## Basic Math Explanation
 # Mathematical Explanation of ANN and CNN
 
-This document provides a mathematical explanation of **Artificial Neural Networks (ANNs)** and **Convolutional Neural Networks (CNNs)**. It focuses purely on the theoretical mathematical foundations of these networks without implementation details.
+This document provides a mathematical explanation of **Artificial Neural Networks (ANNs)** and **Convolutional Neural Networks (CNNs)**. It focuses purely on the theoretical mathematical foundations of these networks without details on implementation.
 
 ---
 
@@ -132,8 +133,7 @@ An **Artificial Neural Network (ANN)** consists of multiple layers:
 ### 🔹 Forward Propagation
 Each neuron in layer \( l \) receives inputs from layer \( l-1 \), applies a weighted sum, adds a bias, and passes it through an activation function.
 
-**Neuron Output Equation**$$y_j^{(l)} = h \left( \sum_{i=1}^{n} w_{ji}^{(l)} x_i^{(l-1)} + b_j^{(l)} 
-ight)$$
+**Neuron Output Equation** $$y_j^{(l)} = h \left( \sum_{i=1}^{n} w_{ji}^{(l)} x_i^{(l-1)} + b_j^{(l)} right)$$
 
 where:
 - \( x_i^{(l-1)} \) are the inputs from the previous layer.
