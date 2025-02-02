@@ -84,7 +84,7 @@ An **Artificial Neural Network (ANN)** consists of multiple layers:
 ### 🔹 Forward Propagation
 Each neuron in layer \( l \) receives inputs from layer \( l-1 \), applies a weighted sum, adds a bias, and passes it through an activation function.
 
-**Neuron Output Equation** $$y_j^{(l)} = h \left(  \sum_{i=1}^{n}  w_{ji}^{(l)}  x_i^{(l-1)}  + b_j^{(l)} \right)$$
+**Neuron Output Equation** $$y_j^{(l)} = h \left( \sum_{i=1}^{n} w_{ji}^{(l)} x_i^{(l-1)} + b_j^{(l)} \right)$$
 
 where:
 - $$\( x_i^{(l-1)} \)$$ are the inputs from the previous layer.
@@ -131,9 +131,9 @@ where:
 - $$\( K \)$$ is the kernel (filter).
 - $$\( y_{ij} \)$$ is the output feature map.
 
-**Output Size Formula** $$H_{out} = rac{H_{in} - h_{kernel} + 2 	imes padding}{stride} + 1$$
+**Output Size Formula** $$H_{out} = \frac{H_{in} - h_{kernel} + 2 \times padding}{stride} + 1$$
 
-$$W_{out} = rac{W_{in} - w_{kernel} + 2 	imes padding}{stride} + 1$$
+$$W_{out} = rac{W_{in} - w_{kernel} + 2 \times padding}{stride} + 1$$
 
 where:
 - $$\( H_{in}, W_{in} \)$$ are input dimensions.
