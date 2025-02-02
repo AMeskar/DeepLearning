@@ -95,10 +95,10 @@ where:
 ### 🔹 Activation Functions
 Activation functions introduce non-linearity. Common ones include:
 
-- **Sigmoid**  $$\sigma(x) = rac{1}{1 + e^{-x}}$$
-- **Tanh**  $$tanh(x) = rac{e^x - e^{-x}}{e^x + e^{-x}}$$
-- **ReLU**  $$ReLU(x) = \max(0, x)$$
-- **Softmax**  $$Softmax(x_i) = rac{e^{x_i}}{\sum_j e^{x_j}}$$
+- **Sigmoid**:  $$\sigma(x) = rac{1}{1 + e^{-x}}$$
+- **Tanh**:   $$tanh(x) = rac{e^x - e^{-x}}{e^x + e^{-x}}$$
+- **ReLU**:  $$ReLU(x) = \max(0, x)$$
+- **Softmax**:   $$Softmax(x_i) = rac{e^{x_i}}{\sum_j e^{x_j}}$$
 
 ### 🔹 Loss Function
 A **loss function** measures the difference between the predicted output and the actual target.
@@ -127,17 +127,17 @@ Each convolutional layer applies a **filter (kernel)** of size \( h 	imes w \) t
 **Convolutional Layer Output**$$y_{ij} = \sum_{m=1}^{h} \sum_{n=1}^{w} K_{mn} X_{(i+m)(j+n)}$$
 
 where:
-- \( X \) is the input matrix.
-- \( K \) is the kernel (filter).
-- \( y_{ij} \) is the output feature map.
+- $$\( X \)$$ is the input matrix.
+- $$\( K \)$$ is the kernel (filter).
+- $$\( y_{ij} \)$$ is the output feature map.
 
-**Output Size Formula**$$H_{out} = rac{H_{in} - h_{kernel} + 2 	imes padding}{stride} + 1$$
+**Output Size Formula** $$H_{out} = rac{H_{in} - h_{kernel} + 2 	imes padding}{stride} + 1$$
 
 $$W_{out} = rac{W_{in} - w_{kernel} + 2 	imes padding}{stride} + 1$$
 
 where:
-- \( H_{in}, W_{in} \) are input dimensions.
-- \( h_{kernel}, w_{kernel} \) are kernel dimensions.
+- $$\( H_{in}, W_{in} \)$$ are input dimensions.
+- $$\( h_{kernel}, w_{kernel} \)$$ are kernel dimensions.
 - **Padding** adds extra zeros to input borders.
 - **Stride** determines the step size of the filter.
 
@@ -151,14 +151,13 @@ $$W_{out} = rac{W_{in} - w_{kernel}}{stride} + 1$$
 ### 🔹 Fully Connected Layer
 Once convolutional layers extract features, fully connected layers process them for classification.
 
-**Fully Connected Neuron Output**$$y_j = h \left( \sum_{i=1}^{n} w_{ji} x_i + b_j 
-ight)$$
+**Fully Connected Neuron Output**$$y_j = h \left( \sum_{i=1}^{n} w_{ji} x_i + b_j \right)$$
 
 where:
-- \( x_i \) are the inputs from the previous layer.
-- \( w_{ji} \) are the weights.
-- \( b_j \) is the bias term.
-- \( h(x) \) is an activation function.
+- $$\( x_i \)$$ are the inputs from the previous layer.
+- $$\( w_{ji} \)$$ are the weights.
+- $$\( b_j \)$$ is the bias term.
+- $$\( h(x) \)$$ is an activation function.
 
 ### 🔹 Loss Function for CNNs
 For classification tasks, **cross-entropy loss** is typically used:
@@ -166,20 +165,18 @@ For classification tasks, **cross-entropy loss** is typically used:
 $$CE = -\sum_{i=1}^{N} y_i \log(t_i)$$
 
 where:
-- \( y_i \) is the predicted probability.
-- \( t_i \) is the actual label (one-hot encoded).
+- $$\( y_i \)$$ is the predicted probability.
+- $$\( t_i \)$$ is the actual label (one-hot encoded).
 
 ### 🔹 Optimization: Backpropagation in CNNs
 CNNs use **gradient descent** to update weights based on **backpropagation**, just like ANNs.
 
-**Gradient Update Rule**$$w_i (t+1) = w_i (t) - \eta 
-abla E(w_i (t))$$
+**Gradient Update Rule**$$w_i (t+1) = w_i (t) - \eta \nabla E(w_i (t))$$
 
 where:
-- \( \eta \) is the learning rate.
-- \( E \) is the loss function.
-- \( 
-abla E \) is the gradient of the loss with respect to the weights.
+- $$\( \eta \)$$ is the learning rate.
+- $$\( E \)$$ is the loss function.
+- $$\( \nabla E \)$$ is the gradient of the loss with respect to the weights.
 
 ---
 
