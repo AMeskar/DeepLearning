@@ -4,13 +4,13 @@ This project processes simulated ANTARES data, prepares it for machine learning,
 
 ## Table of Contents
 
-1. [Features](#features){}
-2. [Project Workflow](#project-workflow){}
-3. [Code Breakdown](#code-breakdown){}
-4. [Setup Instructions](#setup-instructions){}
-5. [Future Improvements](#future-improvements){}
-6. [Basic Math Explanation](#Basic-Math-Explanation){}
-7. [Contact Information](#contact-information){}
+1. [Features](#features)
+2. [Project Workflow](#project-workflow)
+3. [Code Breakdown](#code-breakdown)
+4. [Setup Instructions](#setup-instructions)
+5. [Future Improvements](#future-improvements)
+6. [Basic Math Explanation](#Basic-Math-Explanation)
+7. [Contact Information](#contact-information)
 
 
 ## Features
