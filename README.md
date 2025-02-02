@@ -122,7 +122,7 @@ where:
 # 2️⃣ Convolutional Neural Networks (CNN)
 
 ### 🔹 Convolution Operation
-Each convolutional layer applies a **filter (kernel)** of size \( h \times w \) to an input tensor.
+Each convolutional layer applies a **filter (kernel)** of size $$\( h \times w \)$$ to an input tensor.
 
 **Convolutional Layer Output**$$y_{ij} = \sum_{m=1}^{h} \sum_{n=1}^{w} K_{mn} X_{(i+m)(j+n)}$$
 
