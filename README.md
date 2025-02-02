@@ -88,9 +88,9 @@ Each neuron in layer \( l \) receives inputs from layer \( l-1 \), applies a wei
 
 where:
 - $$\( x_i^{(l-1)} \)$$ are the inputs from the previous layer.
-- \( w_{ji}^{(l)} \) are the weights.
-- \( b_j^{(l)} \) is the bias term.
-- \( h(x) \) is an **activation function**.
+- $$\( w_{ji}^{(l)} \)$$ are the weights.
+- $$\( b_j^{(l)} \)$$ is the bias term.
+- $$\( h(x) \)$$ is an **activation function**.
 
 ### 🔹 Activation Functions
 Activation functions introduce non-linearity. Common ones include:
