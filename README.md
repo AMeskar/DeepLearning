@@ -87,7 +87,7 @@ Each neuron in layer \( l \) receives inputs from layer \( l-1 \), applies a wei
 **Neuron Output Equation** $$y_j^{(l)} = h \left( \sum_{i=1}^{n} w_{ji}^{(l)} x_i^{(l-1)} + b_j^{(l)} \right)$$
 
 where:
-- \( x_i^{(l-1)} \) are the inputs from the previous layer.
+- $$\( x_i^{(l-1)} \)$$ are the inputs from the previous layer.
 - \( w_{ji}^{(l)} \) are the weights.
 - \( b_j^{(l)} \) is the bias term.
 - \( h(x) \) is an **activation function**.
