@@ -56,10 +56,6 @@ This script loads structured matrices and formats them as image-like data for CN
 ### Shell Scripts
 
 **Auto_Read_text.sh** installs dependencies and processes individual **.evt** files. **Auto_Run_All.sh** automates the parallel processing of multiple files in a given directory, ensuring seamless data extraction and preparation.
-
-## Setup Instructions
-
-
   
 ## Basic Math Explanation
 # Mathematical Explanation of ANN and CNN
